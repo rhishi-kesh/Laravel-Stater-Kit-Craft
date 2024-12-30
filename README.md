@@ -15,11 +15,11 @@
 To Install & Run This Project You Have To Follow the following Steps:
 
 ```sh
-git clone -b craft-api https://github.com/rhishi-kesh/Laravel-StaterKit.git
+git clone -b app-api https://github.com/rhishi-kesh/Laravel-Stater-Kit-Craft.git
 ```
 
 ```sh
-cd Laravel-StaterKit
+cd Laravel-Stater-Kit-Craft
 ```
 
 ```sh
