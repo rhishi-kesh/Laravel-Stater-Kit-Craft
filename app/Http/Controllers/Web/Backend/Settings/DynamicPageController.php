@@ -47,9 +47,14 @@ class DynamicPageController extends Controller {
                     return $status;
                 })
                 ->addColumn('action', function ($data) {
-                    return ' <a href="' . route('dynamic_page.edit', ['id' => $data->id]) . '" type="button" class="btn btn-primary text-white btn-sm" title="Edit">
+                    return '<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                              <a href="' . route('dynamic_page.edit', ['id' => $data->id]) . '" type="button" class="text-white btn btn-primary" title="Edit">
                               <i class="bi bi-pencil"></i>
-                              </a> ';
+                              </a>
+                              <a href="#" onclick="showDeleteConfirm(' . $data->id . ')" type="button" class="text-white btn btn-danger" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </a>
+                            </div>';
                 })
                 ->rawColumns(['page_content', 'status', 'action'])
                 ->make();

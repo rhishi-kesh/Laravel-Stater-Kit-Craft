@@ -32,17 +32,17 @@
 @section('content')
     <!--begin::Toolbar-->
     <div class="toolbar" id="kt_toolbar">
-        <div class=" container-fluid  d-flex flex-stack flex-wrap flex-sm-nowrap">
+        <div class="flex-wrap container-fluid d-flex flex-stack flex-sm-nowrap">
             <!--begin::Info-->
-            <div class="d-flex flex-column align-items-start justify-content-center flex-wrap me-2">
+            <div class="flex-wrap d-flex flex-column align-items-start justify-content-center me-2">
                 <!--begin::Title-->
-                <h1 class="text-dark fw-bold my-1 fs-2">
+                <h1 class="my-1 text-dark fw-bold fs-2">
                     Dashboard <small class="text-muted fs-6 fw-normal ms-1"></small>
                 </h1>
                 <!--end::Title-->
 
                 <!--begin::Breadcrumb-->
-                <ul class="breadcrumb fw-semibold fs-base my-1">
+                <ul class="my-1 breadcrumb fw-semibold fs-base">
                     <li class="breadcrumb-item text-muted">
                         <a href="{{ route('admin.dashboard') }}" class="text-muted text-hover-primary">
                             Home </a>
@@ -62,59 +62,57 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <div class="card-style mb-4">
-                    <div class="card card-body">
-                        <form action="{{ route('social.update') }}" method="POST">
-                            @csrf
-                            <div style="display: flex;justify-content: end;margin-bottom: 10px;">
-                                <button class="btn btn-success" type="button" onclick="addSocialField()"
-                                    style="font-weight: 900" title="Add a new social media field">Add</button>
-                            </div>
-                            <div id="social_media_container">
-                                @foreach ($social_link as $index => $link)
-                                    <div class="social_media input-group mb-3 dropdown">
-                                        <input type="hidden" name="social_media_id[]" value="{{ $link->id }}">
-                                        <select class="dropdown-toggle border" name="social_media[]"
-                                            value="@isset($social_link){{ $link->social_media }}@endisset"
-                                            title="Select a social media platform">
-                                            <option class="dropdown-item">Select Social</option>
-                                            <option class="dropdown-item" value="facebook"
-                                                {{ $link->social_media == 'facebook' ? 'selected' : '' }}>Facebook
-                                            </option>
-                                            <option class="dropdown-item" value="instagram"
-                                                {{ $link->social_media == 'instagram' ? 'selected' : '' }}>Instagram
-                                            </option>
-                                            <option class="dropdown-item" value="twitter"
-                                                {{ $link->social_media == 'twitter' ? 'selected' : '' }}>Twitter
-                                            </option>
-                                            <option class="dropdown-item" value="linkedin"
-                                                {{ $link->social_media == 'linkedin' ? 'selected' : '' }}>Linkedin
-                                            </option>
-                                            {{-- <option class="dropdown-item" value="youtube"
-                                                {{ $link->social_media == 'youtube' ? 'selected' : '' }}>YouTube
-                                            </option>
-                                            <option class="dropdown-item" value="threads"
-                                                {{ $link->social_media == 'threads' ? 'selected' : '' }}>Threads
-                                            </option> --}}
-                                        </select>
-                                        <input type="url" class="form-control" aria-label="Text input with dropdown button"
-                                            name="profile_link[]"
-                                            value="@isset($social_link){{ $link->profile_link }}@endisset"
-                                            placeholder="Enter the profile link here">
-                                        <button class="btn btn-secondary removeSocialBtn" type="button"
-                                            onclick="removeSocialField(this)" style="font-weight: 900"
-                                            data-id="{{ $link->id }}" title="Remove this social media field">Remove</button>
-                                    </div>
-                                @endforeach
-                            </div>
+                <div class="mb-4 card-style">
+                    <form action="{{ route('social.update') }}" method="POST">
+                        @csrf
+                        <div style="display: flex;justify-content: end;margin-bottom: 10px;">
+                            <button class="btn btn-success" type="button" onclick="addSocialField()"
+                                style="font-weight: 900" title="Add a new social media field">Add</button>
+                        </div>
+                        <div id="social_media_container">
+                            @foreach ($social_link as $index => $link)
+                                <div class="mb-3 social_media input-group dropdown">
+                                    <input type="hidden" name="social_media_id[]" value="{{ $link->id }}">
+                                    <select class="border dropdown-toggle" name="social_media[]"
+                                        value="@isset($social_link){{ $link->social_media }}@endisset"
+                                        title="Select a social media platform">
+                                        <option class="dropdown-item">Select Social</option>
+                                        <option class="dropdown-item" value="facebook"
+                                            {{ $link->social_media == 'facebook' ? 'selected' : '' }}>Facebook
+                                        </option>
+                                        <option class="dropdown-item" value="twitter"
+                                            {{ $link->social_media == 'twitter' ? 'selected' : '' }}>Twitter
+                                        </option>
+                                        <option class="dropdown-item" value="skype"
+                                            {{ $link->social_media == 'skype' ? 'selected' : '' }}>Skype
+                                        </option>
+                                        <option class="dropdown-item" value="instagram"
+                                            {{ $link->social_media == 'instagram' ? 'selected' : '' }}>Instagram
+                                        </option>
+                                        {{-- <option class="dropdown-item" value="youtube"
+                                            {{ $link->social_media == 'youtube' ? 'selected' : '' }}>YouTube
+                                        </option>
+                                        <option class="dropdown-item" value="threads"
+                                            {{ $link->social_media == 'threads' ? 'selected' : '' }}>Threads
+                                        </option> --}}
+                                    </select>
+                                    <input type="url" class="form-control" aria-label="Text input with dropdown button"
+                                        name="profile_link[]"
+                                        value="@isset($social_link){{ $link->profile_link }}@endisset"
+                                        placeholder="Enter the profile link here">
+                                    <button class="btn btn-secondary removeSocialBtn" type="button"
+                                        onclick="removeSocialField(this)" style="font-weight: 900"
+                                        data-id="{{ $link->id }}" title="Remove this social media field">Remove</button>
+                                </div>
+                            @endforeach
+                        </div>
 
-                            <div class="col-12 mt-4">
-                                <button type="submit" class="btn btn-primary" title="Submit the form">Submit</button>
-                                <a href="{{ route('admin.dashboard') }}" class="btn btn-danger me-2"
-                                    title="Cancel and go back to the dashboard">Cancel</a>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="mt-4 col-12">
+                            <button type="submit" class="btn btn-primary" title="Submit the form">Submit</button>
+                            <a href="{{ route('admin.dashboard') }}" class="btn btn-danger me-2"
+                                title="Cancel and go back to the dashboard">Cancel</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -136,12 +134,9 @@
             <select class="dropdown-toggle drop-custom" name="social_media[]">
                 <option class="dropdown-item">Select Social</option>
                 <option class="dropdown-item" value="facebook">Facebook</option>
-                <option class="dropdown-item" value="instagram">Instagram</option>
                 <option class="dropdown-item" value="twitter">Twitter</option>
-                <option class="dropdown-item" value="linkedin">Linkedin</option>
-
-
-
+                <option class="dropdown-item" value="skype">skype</option>
+                <option class="dropdown-item" value="instagram">Instagram</option>
             </select>
             <input type="url" class="form-control" aria-label="Text input with dropdown button" name="profile_link[]">
             <button class="btn btn-outline-secondary" type="button" onclick="removeSocialField(this)" style="font-weight: 900">Remove</button>`;
@@ -157,7 +152,7 @@
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
-                    text: "You can only add four social links fields!",
+                    text: "You can only add Four social links fields!",
                 });
             }
         }
@@ -185,7 +180,7 @@
                 });
                 allSelections.forEach(selectElement => {
                     if (allValues.filter(value => value === selectElement.value).length > 1) {
-                        selectElement.value = "Select Social";
+                        selectElement.value = "";
                     }
                 });
             }

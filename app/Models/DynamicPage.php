@@ -11,6 +11,12 @@ class DynamicPage extends Model {
 
     protected $guarded = [];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
     protected $casts = [
         'id' => 'integer',
     ];

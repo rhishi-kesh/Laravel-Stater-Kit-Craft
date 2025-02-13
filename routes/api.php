@@ -5,6 +5,10 @@ use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SocialAuthController;
 use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\DynamicPageController;
+use App\Http\Controllers\Api\FaqController;
+use App\Http\Controllers\Api\SitesettingController;
+use App\Http\Controllers\Api\SocialLinkController;
 use App\Http\Controllers\Api\UserController;
 
 /*
@@ -53,7 +57,27 @@ Route::controller(LoginController::class)->prefix('users/login')->group(function
     Route::post('/reset-password', 'resetPassword');
 });
 
-Route::group(['middleware' => ['jwt.verify']], function() {
+Route::controller(SitesettingController::class)->group(function () {
+    Route::get('/site-settings', 'siteSettings');
+});
+
+//Dynamic Page
+Route::controller(DynamicPageController::class)->group(function () {
+    Route::get('/dynamic-pages', 'dynamicPages');
+    Route::get('/dynamic-pages/single/{slug}', 'single');
+});
+
+//Social Links
+Route::controller(SocialLinkController::class)->group(function () {
+    Route::get('/social-links', 'socialLinks');
+});
+
+//FAQ APIs
+Route::controller(FaqController::class)->group(function () {
+    Route::get('/faq/all', 'FaqAll');
+});
+
+Route::group(['middleware' => ['jwt.verify']], function () {
 
     Route::controller(UserController::class)->prefix('users')->group(function () {
         Route::get('/data', 'userData');
@@ -61,5 +85,4 @@ Route::group(['middleware' => ['jwt.verify']], function() {
         Route::post('/logout', 'logoutUser');
         Route::delete('/delete', 'deleteUser');
     });
-
 });

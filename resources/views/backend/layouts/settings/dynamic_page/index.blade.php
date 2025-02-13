@@ -5,17 +5,17 @@
 @section('content')
     <!--begin::Toolbar-->
     <div class="toolbar" id="kt_toolbar">
-        <div class=" container-fluid  d-flex flex-stack flex-wrap flex-sm-nowrap">
+        <div class="flex-wrap container-fluid d-flex flex-stack flex-sm-nowrap">
             <!--begin::Info-->
-            <div class="d-flex flex-column align-items-start justify-content-center flex-wrap me-2">
+            <div class="flex-wrap d-flex flex-column align-items-start justify-content-center me-2">
                 <!--begin::Title-->
-                <h1 class="text-dark fw-bold my-1 fs-2">
+                <h1 class="my-1 text-dark fw-bold fs-2">
                     Dashboard <small class="text-muted fs-6 fw-normal ms-1"></small>
                 </h1>
                 <!--end::Title-->
 
                 <!--begin::Breadcrumb-->
-                <ul class="breadcrumb fw-semibold fs-base my-1">
+                <ul class="my-1 breadcrumb fw-semibold fs-base">
                     <li class="breadcrumb-item text-muted">
                         <a href="{{ route('admin.dashboard') }}" class="text-muted text-hover-primary">
                             Home </a>
@@ -35,12 +35,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <div class="card p-5">
+                <div class="p-5 card">
                     <div class="card-style mb-30">
-                        {{-- <div class="d-flex justify-content-end mb-3">
+                        <div class="mb-3 d-flex justify-content-end">
                             <a href="{{ route('dynamic_page.create') }}" class="btn btn-primary">Add New
                                 Page</a>
-                        </div> --}}
+                        </div>
                         <div class="table-wrapper table-responsive">
                             <table id="data-table" class="table">
                                 <thead>
