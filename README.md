@@ -15,7 +15,7 @@
 To Install & Run This Project You Have To Follow the following Steps:
 
 ```sh
-git clone -b app-api https://github.com/rhishi-kesh/Laravel-Stater-Kit-Craft.git
+git clone -b web-api https://github.com/rhishi-kesh/Laravel-Stater-Kit-Craft.git
 ```
 
 ```sh
