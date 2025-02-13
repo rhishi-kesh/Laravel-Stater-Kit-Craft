@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -80,6 +81,44 @@ class UserController extends Controller {
         } catch (\Exception $e) {
             return $this->error([], $e->getMessage(), 500);
         }
+    }
+
+     /**
+     * Change Login User Password
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse JSON response with success or error.
+     */
+    public function passwordChange(Request $request) {
+        // Get the authenticated user
+        $user = auth()->user();
+
+        // If user is not found, return an error response
+        if (!$user) {
+            return $this->error([], "User Not Found", 404);
+        }
+
+        // Validate request inputs
+        $validator = Validator::make($request->all(), [
+            'current_password' => 'required',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->error($validator->errors(), "Validation Error", 422);
+        }
+
+        // Check if the current password matches
+        if (!Hash::check($request->current_password, $user->password)) {
+            return $this->error([], "Current password is incorrect", 400);
+        }
+
+        // Update the password securely
+        $user->update([
+            'password' => Hash::make($request->password),
+        ]);
+
+        return $this->success($user->fresh(), "Password changed successfully", 200);
     }
 
     /**

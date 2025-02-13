@@ -12,6 +12,7 @@ class DynamicPage extends Model {
     protected $guarded = [];
 
     protected $hidden = [
+        'status',
         'created_at',
         'updated_at',
         'deleted_at',
